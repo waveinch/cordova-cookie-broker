@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="com.example.hello" version="0.7.0">
+  <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="cordova-cookie-broker" version="0.7.0">
 
-    <name>Hello</name>
+    <name>Cordova Cookie Broker</name>
 
     <engines>
       <engine name="cordova" version=">=3.4.0" />
