@@ -21,5 +21,5 @@
 
   };
 
-  module.exports = cookieBroker.getCookies;
+  module.exports = cookieBroker;
 })();

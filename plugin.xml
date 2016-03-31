@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="cordova-cookie-broker" version="0.7.0">
+  <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="cordova-cookie-broker" version="0.0.1">
 
     <name>Cordova Cookie Broker</name>
 
@@ -9,8 +9,8 @@
 
     <asset src="www/cookie-broker.js" target="js/cookie-broker.js" />
 
-    <js-module src="www/cookie-broker.js" name="cookie-broker">
-      <clobbers target="cookie-broker" />
+    <js-module src="www/cookie-broker.js" name="CookieBroker">
+      <clobbers target="cookieBroker" />
     </js-module>
 
     <platform name="android">
