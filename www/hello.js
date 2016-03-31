@@ -1,7 +1,25 @@
-/*global cordova, module*/
+(function () {
+  'use strict';
+  /*global cordova, module*/
+  var exec = cordova.require('cordova/exec');
+  var cookieBroker = {};
+  cookieBroker.getCookies = getCookies;
 
-module.exports = {
-    greet: function (name, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "Hello", "greet", [name]);
-    }
-};
+  function getCookies(url) {
+    return new Promise(function (resolve, reject) {
+      cordova.exec(successCallback, errorCallback, "CookieBroker", "getCookies", [url]);
+
+      function successCallback(cookieList) {
+        resolve(cookieList);
+      }
+
+      function errorCallback(response) {
+        reject(response);
+      }
+    });
+
+
+  };
+
+  module.exports = cookieBroker.getCookies;
+})();

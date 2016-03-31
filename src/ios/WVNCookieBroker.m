@@ -1,6 +1,6 @@
 #import "HWPHello.h"
 
-@implementation HWPHello
+@implementation WVNCookieBroker
 
 - (void)greet:(CDVInvokedUrlCommand*)command
 {
