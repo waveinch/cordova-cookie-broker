@@ -73,23 +73,25 @@ public class CookieBroker extends CordovaPlugin {
 
         Map<String, List<String>> headerFields = ucon.getHeaderFields();
         List<String> cookiesHeader = headerFields.get(COOKIES_HEADER);
-        List<HttpCookie> allCookies = new ArrayList<HttpCookie>();
-
-        for (String rawCookie : cookiesHeader) {
-            allCookies.addAll(HttpCookie.parse(rawCookie));
-        }
-
         JSONArray cookiesJson = new JSONArray();
 
-        for (HttpCookie cookie : allCookies) {
-            JSONObject cookieJson = new JSONObject();
-            cookieJson.put("name", cookie.getName());
-            cookieJson.put("value", cookie.getValue());
-            cookieJson.put("domain", cookie.getDomain());
-            cookieJson.put("discard", cookie.getDiscard());
-            cookieJson.put("maxAge", cookie.getMaxAge());
-            cookieJson.put("path", cookie.getPath());
-            cookiesJson.put(cookieJson);
+        if (cookiesHeader != null) {
+            List<HttpCookie> allCookies = new ArrayList<HttpCookie>();
+
+            for (String rawCookie : cookiesHeader) {
+                allCookies.addAll(HttpCookie.parse(rawCookie));
+            }
+
+            for (HttpCookie cookie : allCookies) {
+                JSONObject cookieJson = new JSONObject();
+                cookieJson.put("name", cookie.getName());
+                cookieJson.put("value", cookie.getValue());
+                cookieJson.put("domain", cookie.getDomain());
+                cookieJson.put("discard", cookie.getDiscard());
+                cookieJson.put("maxAge", cookie.getMaxAge());
+                cookieJson.put("path", cookie.getPath());
+                cookiesJson.put(cookieJson);
+            }
         }
 
         return cookiesJson;
