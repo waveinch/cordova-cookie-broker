@@ -26,14 +26,14 @@
 
     <platform name="ios">
 
-      <config-file target="config.xml" parent="/widget">
+      <config-file target="config.xml" parent="/*">
         <feature name="CookieBroker">
-          <param name="ios-package" value="HWPCookieBroker" />
+          <param name="ios-package" value="WVNCookieBroker" />
         </feature>
       </config-file>
 
-      <header-file src="src/ios/WVNCookieBroker.h" target-dir="CookieBrokerPlugin" />
-      <source-file src="src/ios/WVNCookieBroker.m" target-dir="CookieBrokerPlugin" />
+      <header-file src="src/ios/WVNCookieBroker.h" />
+      <source-file src="src/ios/WVNCookieBroker.m" />
     </platform>
 
   </plugin>
