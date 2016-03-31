@@ -1,4 +1,5 @@
 #import "WVNCookieBroker.h"
+#import <Cordova/CDVPlugin.h>
 
 @implementation WVNCookieBroker
 
