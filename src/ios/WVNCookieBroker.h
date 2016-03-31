@@ -2,6 +2,6 @@
 
 @interface WVNCookieBroker : CDVPlugin
 
-- (void) greet:(CDVInvokedUrlCommand*)command;
+- (void) getCookies:(CDVInvokedUrlCommand*)command;
 
 @end
