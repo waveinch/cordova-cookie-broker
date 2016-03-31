@@ -36,11 +36,17 @@
                 NSArray *cookies =[[NSArray alloc]init];
                 cookies = [NSHTTPCookie
                            cookiesWithResponseHeaderFields:[httpResponse allHeaderFields]
-                           forURL:@""];
-                NSLog(cookies.description);
+                           forURL:[NSURL URLWithString:@""]];
+                NSMutableArray* jsonCookies = [[NSMutableArray alloc] init];
+                for (NSHTTPCookie* cookie in cookies) {
+                    [jsonCookies addObject:[self cookieJSON:cookie]];
+                }
+                
+                
                 CDVPluginResult* result = [CDVPluginResult
                                            resultWithStatus:CDVCommandStatus_OK
-                                           messageAsArray:cookies];
+                                           messageAsArray:jsonCookies];
+                
                 
                 [self.commandDelegate sendPluginResult:result callbackId:callbackId];
             }
@@ -63,6 +69,27 @@
     }
     
     return cookieString;
+}
+
+-(NSMutableDictionary *) cookieJSON: (NSHTTPCookie *) cookie {
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    if ([cookie name] != nil){
+        [result setObject:[cookie name] forKey:@"name"];
+    }
+    if ([cookie value] != nil){
+        [result setObject:[cookie value] forKey:@"value"];
+    }
+    if ([cookie domain] != nil){
+        [result setObject:[cookie domain] forKey:@"domain"];
+    }
+    if ([cookie path] != nil){
+        [result setObject:[cookie path] forKey:@"path"];
+    }
+    if ([cookie expiresDate] != nil){
+        NSNumber * dateMillis =[NSNumber numberWithDouble:[[cookie expiresDate] timeIntervalSince1970] * 1000];
+        [result setObject:dateMillis forKey:@"maxAge"];
+    }
+    return result;
 }
 
 @end
