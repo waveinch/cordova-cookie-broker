@@ -31,8 +31,9 @@
         
         NSURLSession *session = [NSURLSession sharedSession];
         [[session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-            if ([response respondsToSelector:@selector(allHeaderFields)]) {
+            
+            if (error != nil && [response respondsToSelector:@selector(allHeaderFields)]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
                 NSArray *cookies =[[NSArray alloc]init];
                 cookies = [NSHTTPCookie
                            cookiesWithResponseHeaderFields:[httpResponse allHeaderFields]
@@ -49,6 +50,10 @@
                 
                 
                 [self.commandDelegate sendPluginResult:result callbackId:callbackId];
+            }
+            else {
+                CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Can't reach the server"];
+                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }
            
             
